@@ -1,0 +1,25 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+
+}
+
+.center-page {
+  justify-content: center; 
+}
+
+.top-page {
+  justify-content: flex-start; 
+  padding-top: 100px; 
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.info {
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
