@@ -59,8 +59,16 @@ export function useSudokuGame() {
   const [error, setError] = useState("")
 
   const startGame = () => {
+    const difficulty = localStorage.getItem("difficulty") || "medium"
+
+    let cluesCount = 38
+    if (difficulty === "easy") cluesCount = 45
+    if (difficulty === "medium") cluesCount = 38
+    if (difficulty === "hard") cluesCount = 30
+
     const solved = generateFullSudoku()
-    const puzzle = maskSudoku(solved, 38)
+    const puzzle = maskSudoku(solved, cluesCount)
+
     setGrid(puzzle)
     setInitialGrid(puzzle.map(r => [...r]))
     setSolution(solved)
@@ -86,13 +94,16 @@ export function useSudokuGame() {
   }
 
   const finishGame = () => {
-    if (!checkIfSolvedCorrectly()) return
+    if (!checkIfSolvedCorrectly()) return false
     setError("")
-    const filled = grid.flat().filter((x) => x !== "").length
-    setScore(filled)
-    setPage("result")
-  }
-
+    const difficulty = localStorage.getItem("difficulty")
+    let baseScore = 0
+    if (difficulty === "easy") baseScore = 100
+    if (difficulty === "medium") baseScore = 200
+    if (difficulty === "hard") baseScore = 300
+    setScore(baseScore)
+    return baseScore
+}
   const restartGame = () => setPage("start")
 
   const updateCell = (row, col, value) => {
