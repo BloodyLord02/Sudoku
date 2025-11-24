@@ -1,14 +1,17 @@
-import { useSudokuGame } from "./hooks/useSudokuGame"
+import { BrowserRouter, Routes, Route } from "react-router"
 import StartPage from "./pages/StartPage"
-import GamePage from "./pages/GamePage"
-import ResultPage from "./pages/ResultPage"
-import "./App.css"
+import GameRoute from "./pages/GameRoute"
+import ResultRoute from "./pages/ResultRoute"
+import styles from "./App.module.css"
 
 export default function App() {
-  const {page, grid, score, startGame, finishGame, restartGame, updateCell, initialGrid, error, giveHint,} = useSudokuGame()
-
-  if (page === "start") return <StartPage onStart={startGame} />
-  if (page === "game") return  <GamePage grid={grid} onFinish={finishGame} onChange={updateCell} initialGrid={initialGrid} error={error} onHint={giveHint}  />
-  if (page === "result") return <ResultPage score={score} onRestart={restartGame} />
-  return null
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/game/:id" element={<GameRoute />} />
+        <Route path="/result/:id" element={<ResultRoute />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }

@@ -3,16 +3,19 @@ import Header from "../components/Header/Header"
 import Button from "../components/Button/Button"
 import { Formik, Form, Field } from "formik"
 import * as Yup from "yup"
+import { useNavigate } from "react-router"
+import styles from "../App.module.css"
 
 const SettingsSchema = Yup.object().shape({
   difficulty: Yup.string().required("Оберіть складність"),
 })
 
-export default function StartPage({ onStart }) {
+export default function StartPage() {
   const [showForm, setShowForm] = useState(false)
+  const navigate = useNavigate() 
 
   return (
-    <div className="page center-page">
+    <div className={`${styles.page} ${styles.centerPage}`}>
       <Header title="Sudoku Game" />
 
       {!showForm ? (
@@ -24,8 +27,9 @@ export default function StartPage({ onStart }) {
           }}
           validationSchema={SettingsSchema}
           onSubmit={(values) => {
-          localStorage.setItem("difficulty", values.difficulty)
-          setTimeout(() => onStart(), 0) 
+            localStorage.setItem("difficulty", values.difficulty)
+            const userId = `user${Math.floor(Math.random() * 10000)}`
+            navigate(`/game/${userId}`) 
           }}
         >
           {({ errors, touched }) => (
