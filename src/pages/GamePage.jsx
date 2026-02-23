@@ -18,7 +18,7 @@ export default function GamePage({ onFinish, onRestart, grid, onChange, initialG
 
   return (
     <div className="page top-page">
-      <Header title="Sudoku Game" />
+      <Header title="Game Page" />
 
       <SudokuGrid grid={grid} onChange={onChange} initialGrid={initialGrid} />
 
