@@ -1,18 +1,29 @@
-# React + Vite
+# Sudoku Game
+Класична логічна гра Sudoku, реалізована з використанням React.
+Метою гри є заповнення сітки 9×9 числами від 1 до 9 так, щоб:
+- У кожному рядку не було повторень
+- У кожному стовпці не було повторень
+- У кожному блоці 3×3 не було повторень
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Після завершення гри система перевіряє правильність розв’язку та відображає результат у модальному вікні.
+## Опис проєкту
+Проєкт розроблений у межах лабораторної роботи з дисципліни
+"Стандартизація та документування ПЗ".
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Реалізація базується на компонентній архітектурі React та демонструє:
+- Генерація судоку-поля
+- Перевірка правильності введених чисел
+- Підрахунок очок
+- Модальне вікно завершення гри
+## Інструкція з установки
+- git clone https://github.com/BloodyLord02/Sudoku/tree/lab1_Software_Standardization_and_Documentation
+- cd sudoku
+- npm install
+- npm run dev
+## Конфігурація
+Основні налаштування проєкту знаходяться у файлі:
+- [package.json](./package.json)
+## Авторство
+- [Айсін Владислав (BloodyLord02)](https://github.com/BloodyLord02)
+## Ліцензія
+- [License](./LICENSE)
