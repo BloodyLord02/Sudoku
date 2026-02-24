@@ -1,14 +1,5 @@
 import CookieConsent from 'react-cookie-consent';
 
-/**
- * Компонент для отримання згоди на використання cookies відповідно до GDPR
- *
- * @component
- * @returns {JSX.Element} Cookie consent banner
- *
- * @example
- * <CookieBanner />
- */
 function CookieBanner() {
   return (
     <CookieConsent
