@@ -1,6 +1,8 @@
-import React, { useState } from "react";
 import Modal from "./Modal";
 
+/**
+ * Цей файл описує історії (stories) для компонента Modal, який використовується в грі для відображення різних станів модального вікна.
+ */
 export default {
   title: "Components/Modal",
   component: Modal,
@@ -8,66 +10,76 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [
+    (Story) => (
+      <div style={{ minHeight: "100vh", padding: "2rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
+  argTypes: {
+    isOpen: {
+      control: "boolean", 
+      description: "Визначає, чи відображається модальне вікно на екрані.",
+    },
+    type: {
+      control: "radio", 
+      options: ["finish", "menu"],
+      description: "Визначає внутрішній контент модалки: екран завершення або меню налаштувань",
+    },
+    score: {
+      control: "number", 
+      description: "Кількість набраних балів.",
+    },
+    usePortal: {
+      control: "boolean",
+      description: "Визначає, чи рендерити модалку.",
+    },
+  },
 };
-/**
- * Модальне вікно для завершення гри.
- * Показується коли всі клітинки Sudoku заповнені правильно.
- * Містить:
- * - Результат гри
- * - Кнопку "Почати заново" — починає гру спочатку
- * - Кнопку "Закрити" — закриває модалку та повертає на гру
- */
-export const FinishModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
 
-  return (
-    <div style={{
-      margin: "2rem",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      minHeight: "200px",
-      border: "1px dashed #ccc",
-      padding: "1rem"
-    }}>
-      <Modal
-        isOpen={isOpen}
-        type="finish"
-        score={250}
-        onRestart={() => alert("Почати заново")}
-        onClose={() => setIsOpen(false)}
-        usePortal={false} 
-      />
-    </div>
-  );
+/**
+ * Варіант 1 Модальне вікно завершення гри.
+ * Демонструє стан, коли гравець пройшов рівень.
+ * Відображає фінальний рахунок та кнопку для рестарту (Почати заново) .
+ */
+export const FinishModal = {
+  args: {
+    isOpen: true,
+    type: "finish",
+    score: 120, 
+    usePortal: false, 
+    onRestart: () => console.log("Клік: Перезапуск гри"),
+    onClose: () => console.log("Клік: Закрити модалку"),
+    onGoHome: () => console.log("Клік: На головний екран"),
+  },
 };
-/**
- * Модальне вікно меню гри.
- * Можна активувати в будь-який момент під час гри.
- * Містить:
- * - "Почати нову гру" — перезапускає гру
- * - "Продовжити гру" — закриває модалку і повертає до гри
- */
-export const MenuModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
 
-  return (
-    <div style={{
-      margin: "2rem",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      minHeight: "200px",
-      border: "1px dashed #ccc",
-      padding: "1rem"
-    }}>
-      <Modal
-        isOpen={isOpen}
-        type="menu"
-        onRestart={() => alert("Почати нову гру")}
-        onClose={() => setIsOpen(false)}
-        usePortal={false} 
-      />
-    </div>
-  );
+/**
+ * Варіант 2 Модальне меню гри.
+ * Демонструє кнопки рестарт гри, головний єкран та продовжити.
+ * Містить форму (Formik) для зміни складності гри.
+ */
+export const MenuModal = {
+  args: {
+    isOpen: true,
+    type: "menu",
+    score: 0,
+    usePortal: false,
+    onRestart: () => console.log("Клік: Перезапуск з новими налаштуваннями"),
+    onClose: () => console.log("Клік: Продовжити гру"),
+    onGoHome: () => console.log("Клік: Вихід в меню"),
+  },
+};
+
+/**
+ * Варіант 3 Закритий стан модального вікна.
+ */
+export const ClosedModal = {
+  args: {
+    isOpen: false, 
+    type: "finish",
+    score: 50,
+    usePortal: false,
+  },
 };

@@ -11,7 +11,7 @@ export default function App() {
   return (
     <>
       {page === "start" && <StartPage onStart={startGame} />}
-      {page === "game" && <GamePage grid={grid} onFinish={finishGame} onChange={updateCell} initialGrid={initialGrid} error={error} onHint={giveHint}  />}
+      {page === "game" && <GamePage grid={grid} onFinish={finishGame} onRestart={startGame} onGoHome={restartGame} onChange={updateCell} initialGrid={initialGrid} error={error} onHint={giveHint}  />}
       {page === "result" && <ResultPage score={score} onRestart={restartGame} />}
       <CookieBanner />
     </>

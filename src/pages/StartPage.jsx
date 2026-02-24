@@ -9,40 +9,47 @@ const SettingsSchema = Yup.object().shape({
 })
 
 export default function StartPage({ onStart }) {
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <div className="page center-page">
       <Header title="Sudoku Game" />
-
       {!showForm ? (
         <Button onClick={() => setShowForm(true)}>Почати гру</Button>
       ) : (
-        <Formik
-          initialValues={{
-            difficulty: localStorage.getItem("difficulty") || "medium",
-          }}
+        <Formik initialValues={{ difficulty: localStorage.getItem("difficulty") || "medium", }}
           validationSchema={SettingsSchema}
-          onSubmit={(values) => {
-          localStorage.setItem("difficulty", values.difficulty)
-          setTimeout(() => onStart(), 0) 
+          onSubmit={(values) => { localStorage.setItem( "difficulty", values.difficulty);
+            setTimeout(() => onStart(), 0);
           }}
         >
           {({ errors, touched }) => (
-            <Form className="flex flex-col items-center gap-3 mt-5">
-              <label>Складність:</label>
-              <Field as="select" name="difficulty">
-                <option value="easy">Легка</option>
-                <option value="medium">Середня</option>
-                <option value="hard">Складна</option>
+            <Form className="form-card">
+              <label className="form-label">
+                Складність гри
+              </label>
+              <Field
+                as="select"
+                name="difficulty"
+                className={`form-select ${ errors.difficulty && touched.difficulty ? "error" : "" }`}
+              >
+                <option value="easy">🟢 Легка</option>
+                <option value="medium">🟡 Середня</option>
+                <option value="hard">🔴 Складна</option>
               </Field>
               {errors.difficulty && touched.difficulty && (
-                <div style={{ color: "red" }}>{errors.difficulty}</div>
-              )}
-
-              <div className="flex gap-3 mt-4">
-                <Button type="submit">Підтвердити</Button>
-                <Button type="button" onClick={() => setShowForm(false)}>
+                  <div className="form-error">
+                    {errors.difficulty}
+                  </div>
+                )}
+              <div className="form-buttons">
+                <Button type="submit">
+                  Почати гру
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                >
                   Назад
                 </Button>
               </div>
@@ -51,6 +58,5 @@ export default function StartPage({ onStart }) {
         </Formik>
       )}
     </div>
-    
   )
 }

@@ -4,7 +4,7 @@ import Button from "../components/Button/Button"
 import Modal from "../components/Modal/Modal"
 import { useState } from "react"
 
-export default function GamePage({ onFinish, onRestart, grid, onChange, initialGrid, error, onHint }) {
+export default function GamePage({ onFinish, onRestart, onGoHome, grid, onChange, initialGrid, error, onHint }) {
   const [modalType, setModalType] = useState(null)
   const [lastScore, setLastScore] = useState(0)
   
@@ -30,7 +30,7 @@ export default function GamePage({ onFinish, onRestart, grid, onChange, initialG
         <Button onClick={() => setModalType("menu")}>Меню</Button>
       </div>
 
-      <Modal isOpen={modalType !== null} type={modalType} score={lastScore} onRestart={() => window.location.reload()} onClose={() => setModalType(null)}/>
+      <Modal isOpen={modalType !== null} type={modalType} score={lastScore}  onRestart={onRestart} onGoHome={onGoHome} onClose={() => setModalType(null)}/>
     </div>
   )
 }
